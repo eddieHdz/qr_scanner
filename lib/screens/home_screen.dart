@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:qr_scanner/models/scan_models.dart';
+import 'package:qr_scanner/providers/db_provider.dart';
 import 'package:qr_scanner/providers/providers.dart';
 import 'package:qr_scanner/screens/screens.dart';
 import 'package:qr_scanner/widgets/custom_navigatorbar.dart';
@@ -30,6 +32,7 @@ class _HomeScreenBody extends StatelessWidget {
   Widget build(BuildContext context) {
     final uiProvider = Provider.of<UiProvider>(context);
     final currentIndex = uiProvider.selectedMenuOpt;
+
     switch (currentIndex) {
       case 0:
         return MapasScreen();
