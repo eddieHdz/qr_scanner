@@ -16,7 +16,13 @@ class HomeScreen extends StatelessWidget {
         elevation: 0,
         title: Text('Historial'),
         actions: [
-          IconButton(onPressed: () {}, icon: Icon(Icons.delete_forever))
+          IconButton(
+              onPressed: () {
+                final scanListProvider =
+                    Provider.of<ScanListProvider>(context, listen: false);
+                scanListProvider.borrarTodos();
+              },
+              icon: Icon(Icons.delete_forever))
         ],
       ),
       body: _HomeScreenBody(),
@@ -32,11 +38,15 @@ class _HomeScreenBody extends StatelessWidget {
   Widget build(BuildContext context) {
     final uiProvider = Provider.of<UiProvider>(context);
     final currentIndex = uiProvider.selectedMenuOpt;
+    final scanListProvider =
+        Provider.of<ScanListProvider>(context, listen: false);
 
     switch (currentIndex) {
       case 0:
+        scanListProvider.cargarScansPorTipo('geo');
         return MapasScreen();
       case 1:
+        scanListProvider.cargarScansPorTipo('http');
         return DireccionesScreen();
       default:
         return MapasScreen();
