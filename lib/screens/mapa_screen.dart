@@ -12,6 +12,8 @@ class MapaScreen extends StatefulWidget {
 class _MapaScreenState extends State<MapaScreen> {
   final Completer<GoogleMapController> _controller =
       Completer<GoogleMapController>();
+
+  MapType mapType = MapType.normal;
   @override
   Widget build(BuildContext context) {
     final ScanModel scan =
@@ -39,7 +41,7 @@ class _MapaScreenState extends State<MapaScreen> {
         ],
       ),
       body: GoogleMap(
-        mapType: MapType.normal,
+        mapType: mapType,
         initialCameraPosition: puntoInicial,
         markers: markers,
         onMapCreated: (GoogleMapController controller) {
@@ -47,7 +49,14 @@ class _MapaScreenState extends State<MapaScreen> {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          if (mapType == MapType.normal) {
+            mapType = MapType.satellite;
+          } else {
+            mapType = MapType.normal;
+          }
+          setState(() {});
+        },
         child: Icon(Icons.layers),
       ),
     );
